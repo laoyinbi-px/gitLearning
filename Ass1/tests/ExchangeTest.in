@@ -1,0 +1,14 @@
+add trader1 100
+add trader1 100
+add trader2 -100
+add trader2 100
+add trader3 100
+import trader1 ABC 100
+buy trader2 ABC 20 7.5
+SELL trader1 ABC 10 5
+import trader1 book 100
+export trader1 book 100
+import trader1 book 100
+SELL trader1 book 10 5
+TRADES PRODUCT book
+exit

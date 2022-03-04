@@ -1,0 +1,16 @@
+add trader1 100
+add trader2 100
+add trader3 100
+TRADES TRADER trader1
+import trader1 ABC 100
+ORDER 0000
+buy trader2 ABC 10 7.5
+ORDER 0003
+ORDER 0000
+SELL trader1 ABC 15 5
+buy trader3 ABC 10 7.5
+SELL trader1 ABC 1000 5
+BOOK BUY
+CANCEL BUY 0002
+TRADES PRODUCT ABC
+exit

@@ -1,0 +1,28 @@
+Line: 15
+E: $ 0002: BUY 15.00xABC @ $5.00
+A: $ 0003: BUY 15.00xABC @ $5.00
+
+Line: 16
+E: $ 0004: SELL 65.00xABC @ $6.50
+A: 0003: BUY 15.00xABC @ $5.00
+
+Line: 17
+E: $ ABC
+A: $ 0005: SELL 65.00xABC @ $6.50
+
+Line: 18
+E: $ Trader has an empty inventory.
+A: 0005: SELL 65.00xABC @ $6.50
+
+Line: 19
+E: $ Have a nice day.
+A: $ ABC
+
+Line: 20
+E: 
+A: $ Trader has an empty inventory.
+
+Line: 21
+E: 
+A: $ Have a nice day.
+

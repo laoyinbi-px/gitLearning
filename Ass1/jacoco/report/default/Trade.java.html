@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Trade.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Trade.java</span></div><h1>Trade.java</h1><pre class="source lang-java linenums">import java.util.List;
+import java.io.*;
+
+public class Trade {
+    private String product;
+    private double amount;
+    private double price;
+    private Order sellOrder;
+    private Order buyOrder;
+
+<span class="fc" id="L11">    public Trade(String product, double amount, double price, Order sellOrder, Order buyOrder) {</span>
+<span class="fc" id="L12">        this.product = product;</span>
+<span class="fc" id="L13">        this.amount = amount;</span>
+<span class="fc" id="L14">        this.price = price;</span>
+<span class="fc" id="L15">        this.sellOrder = sellOrder;</span>
+<span class="fc" id="L16">        this.buyOrder = buyOrder;</span>
+<span class="fc" id="L17">    }</span>
+
+    public String getProduct() {
+<span class="fc" id="L20">        return this.product;</span>
+    }
+
+    public double getAmount() {
+<span class="fc" id="L24">        return this.amount;</span>
+    }
+
+    public Order getSellOrder() {
+<span class="fc" id="L28">        return this.sellOrder;</span>
+    }
+
+    public Order getBuyOrder() {
+<span class="fc" id="L32">        return this.buyOrder;</span>
+    }
+
+    public double getPrice() {
+<span class="fc" id="L36">        return this.price;</span>
+    }
+
+    public String toString() {
+<span class="fc" id="L40">        String amount = String.format(&quot;%.2f&quot;,this.getAmount());</span>
+<span class="fc" id="L41">        String price = String.format(&quot;%.2f&quot;,this.getPrice());</span>
+<span class="fc" id="L42">        String seller = this.getSellOrder().getTrader().getID();</span>
+<span class="fc" id="L43">        String buyer = this.getBuyOrder().getTrader().getID();</span>
+<span class="fc" id="L44">        return seller + &quot;-&gt;&quot; + buyer + &quot;: &quot; + amount + &quot;x&quot; + getProduct() + &quot; for $&quot; + price + &quot;.&quot;;</span>
+    }
+
+    public boolean involvesTrader(Trader trader) {
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (trader == null) {</span>
+<span class="nc" id="L49">            return false;</span>
+        }
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (trader.getID().equals(sellOrder.getTrader().getID())) {</span>
+<span class="fc" id="L52">            return true;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        } else if (trader.getID().equals(buyOrder.getTrader().getID())) {</span>
+<span class="fc" id="L54">            return true;</span>
+        } else {
+<span class="fc" id="L56">            return false;</span>
+        }
+    }
+
+    public static void writeTrades(List&lt;Trade&gt; trades, String path) {
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">        if (trades == null || trades.isEmpty()) {</span>
+<span class="fc" id="L62">            return;</span>
+        }
+
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        if (path == null || path.isEmpty()) {</span>
+<span class="nc" id="L66">            return;</span>
+        }
+
+        try {
+<span class="fc" id="L70">            PrintWriter pw = new PrintWriter(path);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            for (Trade trade : trades) {</span>
+<span class="fc" id="L72">                pw.println(trade.toString());</span>
+<span class="fc" id="L73">            }</span>
+<span class="fc" id="L74">            pw.close();</span>
+
+<span class="nc" id="L76">        } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L77">            return;</span>
+<span class="fc" id="L78">        }</span>
+<span class="fc" id="L79">    }</span>
+
+    public static void writeTradesBinary(List&lt;Trade&gt; trades, String path) {
+<span class="pc bpc" id="L82" title="2 of 4 branches missed.">        if (trades == null || trades.isEmpty()) {</span>
+<span class="nc" id="L83">            return;</span>
+        }
+
+<span class="pc bpc" id="L86" title="2 of 4 branches missed.">        if (path == null || path.isEmpty()) {</span>
+<span class="nc" id="L87">            return;</span>
+        }
+
+        try{
+<span class="fc" id="L91">            FileOutputStream f = new FileOutputStream(path);</span>
+<span class="fc" id="L92">            DataOutputStream output = new DataOutputStream(f);</span>
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            for (Trade trade : trades) {</span>
+<span class="fc" id="L95">                output.writeUTF(trade.toString());</span>
+<span class="fc" id="L96">                output.writeUTF(&quot;\u001F&quot;);</span>
+<span class="fc" id="L97">            }</span>
+<span class="fc" id="L98">            output.close();</span>
+
+<span class="nc" id="L100">        } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L101">            return;</span>
+<span class="nc" id="L102">        } catch (IOException e) {</span>
+<span class="nc" id="L103">            return;</span>
+<span class="fc" id="L104">        }</span>
+<span class="fc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
