@@ -1,0 +1,20 @@
+$ Success.
+$ Success.
+$ Success.
+$ No trades have been completed by trader.
+$ Trader now has 100.00 units of ABC.
+$ No orders in either book in the market.
+$ No trades could be made, order added to buy book.
+$ Order is not present in either order book.
+$ 0000: BUY 10.00xABC @ $7.50
+$ Product sold in part, trades as follows:
+trader1->trader2: 10.00xABC for $7.50.
+$ Product bought in part, trades as follows:
+trader1->trader3: 5.00xABC for $5.00.
+$ Order could not be placed onto the market.
+$ 0002: BUY 5.00xABC @ $7.50
+$ Order successfully cancelled.
+$ trader1->trader2: 10.00xABC for $7.50.
+trader1->trader3: 5.00xABC for $5.00.
+$ Have a nice day.
+

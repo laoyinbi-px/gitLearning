@@ -1,0 +1,9 @@
+ADD trader1 500
+IMPORT trader1 NFL -10
+EXPORT trader1 Book 5
+EXPORT trader1 Book -10
+AMOUNT trader1 Book
+IMPORT trader1 pencil 10
+EXPORT trader1 pencil 100
+exit
+
